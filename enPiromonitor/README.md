@@ -1,6 +1,6 @@
 # enPiromonitor
 
-### an RPI-based environment monitor 
+### an RPI-powered environment monitor 
 
 based on [Mjrovai's Air Quality Sensor](https://github.com/Mjrovai/Python4DS/tree/master/RPi_Air_Quality_Sensor)
   
