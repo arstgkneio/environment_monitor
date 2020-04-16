@@ -10,21 +10,21 @@ based on [Mjrovai's Air Quality Sensor](https://github.com/Mjrovai/Python4DS/tre
   * Charles
 
 
-## Capabilities:
+## capabilities:
 
-**records:**
+**recording:**
   * particulate matter density (2.5μm, 10 μm)
   * temperature
   * humidity
   * air pressure
 
-**displays:**
+**displaying:**
   * air quality index
   * temperature 
   * humidity
   * pressure
 
-**materials:**
+**materials used:**
   * RPI sds011 PM sensor 
   * RPI
   * Sense Hat
