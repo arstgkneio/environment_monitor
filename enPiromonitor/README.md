@@ -9,7 +9,7 @@ Shahad
 Charles
 
 
-Capabilities:
+#Capabilities:
 
   measures & records:
     -particulate matter density (2.5μm, 10 μm)
