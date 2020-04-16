@@ -1,33 +1,34 @@
-# enPiromonitor by AeroX
-  an RPI-based environment monitor 
+# enPiromonitor
+
+### an RPI-based environment monitor 
+
+based on [Mjrovai's Air Quality Sensor](https://github.com/Mjrovai/Python4DS/tree/master/RPi_Air_Quality_Sensor)
   
-  based on Mjrovai's Air Quality Sensor: https://github.com/Mjrovai/Python4DS/tree/master/RPi_Air_Quality_Sensor
-  
-# AeroX team (Newcastle University):
-Andrey
-Shahad
-Charles
+### AeroX team (Newcastle University):
+  *Andrey
+  *Shahad
+  *Charles
 
 
-#Capabilities:
+## Capabilities:
 
-  #measures & records:
-    #-particulate matter density (2.5μm, 10 μm)
-    #-temperature
-    #-humidity
-    #-air pressure
+**records:**
+  *particulate matter density (2.5μm, 10 μm)
+  *temperature
+  *humidity
+  *air pressure
 
-  #displays:
-    #-air quality index
-    #-temperature 
-    #-humidity
-    #-pressure
+**displays:**
+  *air quality index
+  *temperature 
+  *humidity
+  *pressure
 
-   m#aterials:
-    #-RPI sds011 PM sensor 
-    #-RPI
-    #-Sense Hat
-    #-LED Screen
+**materials:**
+  *RPI sds011 PM sensor 
+  *RPI
+  *Sense Hat
+  *LED Screen
 
 
 
