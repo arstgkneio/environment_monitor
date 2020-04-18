@@ -8,7 +8,7 @@ import aqi
 from sense_hat import SenseHat
 
 ##### LOGGING SETTINGS #####
-data_log_dir = "/home/pi/Desktop/Air_Quality_Monitor_Code"
+data_log_dir = "./environment_data"
 log_name_prefix = "environment_data"
 SLEEP_DURATION = 60 #in seconds
 my_colour = [255, 255, 255] #sense hat color 

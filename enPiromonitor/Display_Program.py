@@ -8,7 +8,7 @@ monitor_resolution = '1024x600'
 fullscreen_boolean = 'True'
 
 # Retrieve the latest data file
-path = '/home/pi/Desktop/Air_Quality_Monitor_Code'
+path = './environment_data'
 file_prefix = 'environment_data'
 
 
