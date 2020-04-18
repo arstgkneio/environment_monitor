@@ -22,9 +22,10 @@ my_colour = [255, 255, 255] #sense hat color
 ##### FUNCTIONS #####
 sense = SenseHat()
 sense.clear()
-sensor = SDS011("/dev/ttyUSB0", use_query_mode=True)
+#sensor = SDS011("/dev/ttyUSB0", use_query_mode=True)
 
 def get_data(n=3):
+        sensor = SDS011("/dev/ttyUSB0", use_query_mode=True)
         sensor.sleep(sleep=False)
         pmt_2_5 = 0
         pmt_10 = 0
@@ -83,11 +84,16 @@ def create_header(fn):
 ##### MAIN PROGRAM #####
 while True:
 
-    try: 
+    try:
         pmt_2_5, pmt_10 = get_data()
         aqi_2_5, aqi_10 = conv_aqi(pmt_2_5, pmt_10)
     except: 
         print("air quality sensor error, no AQI data written.")
+        pmt_2_5 = 'n/a'
+        pmt_10 = 'n/a'
+        aqi_2_5 = 'n/a'
+        aqi_10 = 'n/a'
+    
 
     try:
         temp_from_humidity, temp_from_pressure, humidity, pressure = get_sense_data()
