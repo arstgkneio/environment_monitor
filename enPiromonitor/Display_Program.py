@@ -2,13 +2,19 @@ import tkinter as tk
 import time as tm
 import os
 import glob
+import inspect
 
 # Settings
 monitor_resolution = '1024x600'
 fullscreen_boolean = 'True'
 
 # Retrieve the latest data file
-path = './environment_data'
+module_path = inspect.getfile(inspect.currentframe())
+
+module_dir = os.path.realpath(os.path.dirname(module_path))
+
+
+path = module_dir + "/environment_data"
 file_prefix = 'environment_data'
 
 

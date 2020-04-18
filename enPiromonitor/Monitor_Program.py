@@ -6,9 +6,21 @@ import psutil
 from sds011 import *
 import aqi
 from sense_hat import SenseHat
+import inspect
 
 ##### LOGGING SETTINGS #####
-data_log_dir = "./environment_data"
+module_path = inspect.getfile(inspect.currentframe())
+
+print(module_path)
+
+module_dir = os.path.realpath(os.path.dirname(module_path))
+
+print(module_dir)
+
+data_log_dir = module_dir + "/environment_data"
+
+print(data_log_dir)
+
 log_name_prefix = "environment_data"
 SLEEP_DURATION = 60 #in seconds
 my_colour = [255, 255, 255] #sense hat color 
