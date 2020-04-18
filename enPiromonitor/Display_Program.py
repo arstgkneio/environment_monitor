@@ -40,36 +40,51 @@ def update_bg_color(PM_type):
     aqi_2_5 = raw_data_line.split(',')[2]
     aqi_10 = raw_data_line.split(',')[4]
 
+    #check if aqi_2_5/10 is a number before executing code below
+
+
     aqi_color = 'black'
     aqi_color_2_5 = 'black'
     aqi_color_10 = 'black'
-    
-    if float(aqi_2_5) >= 200:
-        aqi_color_2_5 = 'maroon'
-    elif float(aqi_2_5) >= 150:
-        aqi_color_2_5 = 'red'
-    elif float(aqi_2_5) >= 100:
-        aqi_color_2_5 = 'orange'
-    elif float(aqi_2_5) >= 50:
-        aqi_color_2_5 = 'yellow'
-    elif float(aqi_2_5) >= 0:
-        aqi_color_2_5 = 'green'
+
+    try:
+        aqi_2_5_num = float(aqi_2_5)
+    except:
+        print("aqi_2_5 not a number") 
+
     else:
-        aqi_color_2_5 = 'black'
-        
-    if float(aqi_10) >= 200:
-        aqi_color_10 = 'maroon'
-    elif float(aqi_10) >= 150:
-        aqi_color_10 = 'red'
-    elif float(aqi_10) >= 100:
-        aqi_color_10 = 'orange'
-    elif float(aqi_10) >= 50:
-        aqi_color_10 = 'yellow'
-    elif float(aqi_10) >= 0:
-        aqi_color_10 = 'green'
-    else:
-        aqi_color_10 = 'black'
-        
+        if aqi_2_5_num >= 200:
+            aqi_color_2_5 = 'maroon'
+        elif aqi_2_5_num >= 150:
+            aqi_color_2_5 = 'red'
+        elif aqi_2_5_num >= 100:
+            aqi_color_2_5 = 'orange'
+        elif aqi_2_5_num >= 50:
+            aqi_color_2_5 = 'yellow'
+        elif aqi_2_5_num >= 0:
+            aqi_color_2_5 = 'green'
+        else:
+            aqi_color_2_5 = 'black'
+
+    try:
+        aqi_10_num = float(aqi_10)
+    except: 
+        print("aqi_10 not a number") 
+    else:    
+
+        if aqi_10_num >= 200:
+            aqi_color_10 = 'maroon'
+        elif aqi_10_num >= 150:
+            aqi_color_10 = 'red'
+        elif aqi_10_num >= 100:
+            aqi_color_10 = 'orange'
+        elif aqi_10_num >= 50:
+            aqi_color_10 = 'yellow'
+        elif aqi_10_num >= 0:
+            aqi_color_10 = 'green'
+        else:
+            aqi_color_10 = 'black'
+            
     #print(aqi_color)
     if PM_type == '2_5':
         return(aqi_color_2_5)
@@ -189,8 +204,13 @@ def update_humid_data_label():
 def update_aqi_2_5_data_label():
     raw_data_line = get_last_line().rstrip()
     aqi_2_5 = raw_data_line.split(',')[2]
-    aqi_2_5_data_label['text'] = "{:6.1f}".format(float(aqi_2_5))
-
+    try:
+        aqi_2_5_num = float(aqi_2_5)
+    except:
+        aqi_2_5_data_label['text'] = "{:6s}".format(aqi_2_5)
+    else:
+        aqi_2_5_data_label['text'] = "{:6.1f}".format(aqi_2_5_num)
+    
     aqi_2_5_data_label['bg'] = update_bg_color('2_5')
     
 
@@ -202,7 +222,13 @@ def update_aqi_2_5_data_label():
 def update_aqi_10_data_label():
     raw_data_line = get_last_line().rstrip()
     aqi_10 = raw_data_line.split(',')[4]
-    aqi_10_data_label['text'] = "{:6.1f}".format(float(aqi_10))
+
+    try:
+        aqi_10_num = float(aqi_10)
+    except:
+        aqi_10_data_label['text'] = "{:6s}".format(aqi_10)
+    else:
+        aqi_10_data_label['text'] = "{:6.1f}".format(aqi_10_num)
     
     aqi_10_data_label['bg'] = update_bg_color('10')
 

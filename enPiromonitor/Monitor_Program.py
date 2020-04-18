@@ -93,7 +93,7 @@ while True:
         pmt_10 = 'n/a'
         aqi_2_5 = 'n/a'
         aqi_10 = 'n/a'
-    
+    print(pmt_10, )
 
     try:
         temp_from_humidity, temp_from_pressure, humidity, pressure = get_sense_data()
