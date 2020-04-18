@@ -11,15 +11,9 @@ import inspect
 ##### LOGGING SETTINGS #####
 module_path = inspect.getfile(inspect.currentframe())
 
-print(module_path)
-
 module_dir = os.path.realpath(os.path.dirname(module_path))
 
-print(module_dir)
-
 data_log_dir = module_dir + "/environment_data"
-
-print(data_log_dir)
 
 log_name_prefix = "environment_data"
 SLEEP_DURATION = 60 #in seconds
@@ -88,9 +82,17 @@ def create_header(fn):
 
 ##### MAIN PROGRAM #####
 while True:
-    pmt_2_5, pmt_10 = get_data()
-    aqi_2_5, aqi_10 = conv_aqi(pmt_2_5, pmt_10)
-    temp_from_humidity, temp_from_pressure, humidity, pressure = get_sense_data()
+
+    try: 
+        pmt_2_5, pmt_10 = get_data()
+        aqi_2_5, aqi_10 = conv_aqi(pmt_2_5, pmt_10)
+    except: 
+        print("air quality sensor error, no AQI data written.")
+
+    try:
+        temp_from_humidity, temp_from_pressure, humidity, pressure = get_sense_data()
+    except:
+        print("Sense Hat error, no temp/humid/press data written.")
      
     save_log()
         
