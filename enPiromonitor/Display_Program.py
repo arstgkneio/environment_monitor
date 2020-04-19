@@ -1,19 +1,21 @@
 import tkinter as tk
 import time as tm
+import datetime
 import os
 import glob
 import inspect
 
-# Settings
+# Display Settings
 monitor_resolution = '1024x600'
 fullscreen_boolean = 'True'
 
-# Retrieve the latest data file
+# Gets the canonical path, eliminating any symbolic links
 module_path = inspect.getfile(inspect.currentframe())
 
+# Builds working directory using canonical path
 module_dir = os.path.realpath(os.path.dirname(module_path))
 
-
+# Folder containing .csv files
 path = module_dir + "/environment_data"
 file_prefix = 'environment_data'
 
@@ -93,6 +95,7 @@ def update_bg_color(PM_type):
     else:
         return(aqi_color)
 '''
+#background color set based on higher of the two aqi values
     if float(aqi_2_5) >= 200 or float(aqi_10) >= 200:
         aqi_color = 'maroon'
     elif float(aqi_2_5) >= 150 or float(aqi_10) >= 150:
@@ -242,10 +245,29 @@ def display_time():
     clock_label['text'] = current_time
     clock_label.after(200, display_time)
 
+# Function to update time_last_measurement widget
+# based on dt value from latest recording
+def update_time_last_measurement_data_label():
+    #current_time = tm.strftime('%I:%M:%S %p')
+    raw_data_line = get_last_line().rstrip()
+    dt_latest = raw_data_line.split(',')[0]
+    dt_latest_obj = datetime.datetime.strptime(dt_latest, "%Y-%m-%d %I:%M:%S.%f")
+    time_last_measurement = dt_latest_obj.strftime("%H:%M:%S")
+    time_last_measurement_data_label['text'] = time_last_measurement
+
+    time_last_measurement_data_label['bg'] = update_bg_color('0')
+
+    time_last_measurement_data_label.after(5000, update_time_last_measurement_data_label)
+
+def update_time_last_measurement_label():
+    time_last_measurement_label['bg'] = update_bg_color('0')
+    
+    time_last_measurement_label.after(5000, update_title_label)
+
 
 
 #update_bg_color()
-# Create the main window with and set its atributes
+# Create the main window with and set its attributes
 my_window = tk.Tk()
 my_window.title('Environment Data')
 #my_window.configure(bg='black')
@@ -338,6 +360,16 @@ update_aqi_10_title_label()
 aqi_10_data_label = tk.Label(my_window, font='courier 45 bold', fg='gray')
 aqi_10_data_label.grid(row=5, column=1)
 update_aqi_10_data_label()
+
+# Create time_last_measurement_label widget
+time_last_measurement_label = tk.Label(my_window, text = 'last update:', font = 'courier 25', fg='gray')
+time_last_measurement_label.grid(row=101, column=1)
+update_time_last_measurement_label()
+
+# Create time_last_measurement_data_label widget
+time_last_measurement_data_label = tk.Label(my_window, font = 'courier 25 bold', fg ='gray')
+time_last_measurement_data_label.grid(row=101, column=2, columnspan=2)
+update_time_last_measurement_data_label()
 
 
 
