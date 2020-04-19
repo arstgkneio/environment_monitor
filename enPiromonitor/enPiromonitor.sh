@@ -3,11 +3,11 @@
 # Assigns environment variable necessary for display program 
 export DISPLAY=:0.0 
 
-python3 /<PATH_GOES_HERE>/Monitor_Program.py &
+python3 Monitor_Program.py &
 
 
 
-python3 /<PATH_GOES_HERE>/Display_Program.py &
+python3 Display_Program.py &
 
 
 # to run on boot with crontab add "@reboot sleep 30 && <PATH_GOES_HERE>/enPiromonitor.sh 2><PATH_GOES_HERE>/error_log.txt &"

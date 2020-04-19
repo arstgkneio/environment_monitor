@@ -7,7 +7,7 @@ import inspect
 
 # Display Settings
 monitor_resolution = '1024x600'
-fullscreen_boolean = 'True'
+fullscreen_boolean = False
 
 # Gets the canonical path, eliminating any symbolic links
 module_path = inspect.getfile(inspect.currentframe())
@@ -251,8 +251,8 @@ def update_time_last_measurement_data_label():
     #current_time = tm.strftime('%I:%M:%S %p')
     raw_data_line = get_last_line().rstrip()
     dt_latest = raw_data_line.split(',')[0]
-    dt_latest_obj = datetime.datetime.strptime(dt_latest, "%Y-%m-%d %I:%M:%S.%f")
-    time_last_measurement = dt_latest_obj.strftime("%H:%M:%S")
+    dt_latest_obj = datetime.datetime.strptime(dt_latest, "%Y-%m-%d %H:%M:%S.%f")
+    time_last_measurement = dt_latest_obj.strftime("%I:%M:%S")
     time_last_measurement_data_label['text'] = time_last_measurement
 
     time_last_measurement_data_label['bg'] = update_bg_color('0')
