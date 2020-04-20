@@ -5,9 +5,10 @@ import os
 import glob
 import inspect
 
-# Display Settings
-monitor_resolution = '1024x600'
-fullscreen_boolean = 'True'
+# SETTINGS
+#=======================================================================================================================================
+my_resolution = 0  #auto-detects if 0
+fullscreen_boolean = False
 
 # Gets the canonical path, eliminating any symbolic links
 module_path = inspect.getfile(inspect.currentframe())
@@ -19,6 +20,10 @@ module_dir = os.path.realpath(os.path.dirname(module_path))
 path = module_dir + "/environment_data"
 file_prefix = 'environment_data'
 
+
+
+# FUNCTIONS
+#=======================================================================================================================================
 
 # Function to retrieve the last line from a file
 def get_last_line():
@@ -268,13 +273,25 @@ def update_time_last_measurement_label():
 
 
 
-#update_bg_color()
+
+
+# MAIN FUNCTION
+#======================================================================================================================================
+
 # Create the main window and set its attributes
 my_window = tk.Tk()
 my_window.title('enpiromonitor')
-#my_window.configure(bg='black')
-my_window['bg']=update_bg_color('0') # has same effect as the line above
-#update_my_window_label()
+my_window['bg']=update_bg_color('0') 
+
+# Checks if display resolution has been set manually
+if my_resolution == 0:
+    # Gets resolution of display and sets it automatically
+    screen_width = my_window.winfo_screenwidth()
+    screen_height = my_window.winfo_screenheight()
+    monitor_resolution = str(screen_width) + 'x' + str(screen_height)
+else:
+    monitor_resolution = my_resolution
+
 
 my_window.geometry(monitor_resolution)
 #my_window.overrideredirect(True)
