@@ -123,10 +123,12 @@ def update_my_window_label():
     
     my_window.after(5000, update_my_window_label)
 
+'''
 def update_title_label():
     title_label['bg'] = update_bg_color('0')
     
     title_label.after(5000, update_title_label)
+'''
 
 def update_clock_label():
     clock_label['bg'] = update_bg_color('0')
@@ -251,8 +253,8 @@ def update_time_last_measurement_data_label():
     #current_time = tm.strftime('%I:%M:%S %p')
     raw_data_line = get_last_line().rstrip()
     dt_latest = raw_data_line.split(',')[0]
-    dt_latest_obj = datetime.datetime.strptime(dt_latest, "%Y-%m-%d %I:%M:%S.%f")
-    time_last_measurement = dt_latest_obj.strftime("%H:%M:%S")
+    dt_latest_obj = datetime.datetime.strptime(dt_latest, "%Y-%m-%d %H:%M:%S.%f")
+    time_last_measurement = dt_latest_obj.strftime("%I:%M:%S %p")
     time_last_measurement_data_label['text'] = time_last_measurement
 
     time_last_measurement_data_label['bg'] = update_bg_color('0')
@@ -262,14 +264,14 @@ def update_time_last_measurement_data_label():
 def update_time_last_measurement_label():
     time_last_measurement_label['bg'] = update_bg_color('0')
     
-    time_last_measurement_label.after(5000, update_title_label)
+    time_last_measurement_label.after(5000, update_time_last_measurement_label)
 
 
 
 #update_bg_color()
-# Create the main window with and set its attributes
+# Create the main window and set its attributes
 my_window = tk.Tk()
-my_window.title('Environment Data')
+my_window.title('enpiromonitor')
 #my_window.configure(bg='black')
 my_window['bg']=update_bg_color('0') # has same effect as the line above
 #update_my_window_label()
@@ -279,96 +281,98 @@ my_window.geometry(monitor_resolution)
 my_window.wm_attributes('-fullscreen',fullscreen_boolean)
 #my_window.wm_attributes('-topmost','true')
 
+'''
 # Create the title_label widget
 title_label = tk.Label(my_window, text='En-pi-ronment Monitor', font='ariel 70', fg='white')
 title_label.grid(row=0, column=0, columnspan=2)
 update_title_label()
+'''
 
 # Create the clock_label widget
-clock_label = tk.Label(my_window, font='ariel 70', fg='gray')
-clock_label.grid(row=100, column=0, columnspan=3)
+clock_label = tk.Label(my_window, font='ariel 25', fg='gray')
+clock_label.grid(row=100, column=0, columnspan=1)
 display_time()
 update_clock_label()
 
 
 # Create the temp_title_label widget
 temp_title_label = tk.Label(my_window, text='Temperature'.ljust(23,padding_char), font='courier 45', fg='gray')
-temp_title_label.grid(row=1, column=0, sticky='W')
+temp_title_label.grid(row=3, column=0, sticky='W')
 update_temp_title_label()
 
 # Create the temp_data_label widget
 temp_data_label = tk.Label(my_window, font='courier 45 bold', fg='gray')
-temp_data_label.grid(row=1, column=1)
+temp_data_label.grid(row=3, column=1)
 update_temp_data_label()
 
 # Create the temp_unit_label widget
 degree_sign = u'\N{DEGREE SIGN}' #unicode
 temp_unit_label = tk.Label(my_window, text=degree_sign+'C', font='courier 45', fg='gray')
-temp_unit_label.grid(row=1, column=2, sticky='W')
+temp_unit_label.grid(row=3, column=2, sticky='W')
 update_temp_unit_label()
 
 # Create the press_title_label widget
-press_title_label = tk.Label(my_window, text='Pressure'.ljust(23,padding_char), font='courier 45', fg='gray')
-press_title_label.grid(row=2, column=0, sticky='W')
+press_title_label = tk.Label(my_window, text='Pressure'.ljust(23,padding_char), font='courier 25', fg='gray')
+press_title_label.grid(row=4, column=0, sticky='W')
 update_press_title_label()
 
 # Create the pressure_data_label widget
-press_data_label = tk.Label(my_window, font='courier 45 bold', fg='gray')
-press_data_label.grid(row=2, column=1)
+press_data_label = tk.Label(my_window, font='courier 25 bold', fg='gray')
+press_data_label.grid(row=4, column=1)
 update_press_data_label()
 
 # Create the press_unit_label widget
-press_unit_label = tk.Label(my_window, text='hPa', font='courier 45', fg='gray')
-press_unit_label.grid(row=2, column=2, sticky='W')
+press_unit_label = tk.Label(my_window, text='hPa', font='courier 25', fg='gray')
+press_unit_label.grid(row=4, column=2, sticky='W')
 update_press_unit_label()
 
 # Create the humid_title_label widget
-humid_title_label = tk.Label(my_window, text='Humidity'.ljust(23,padding_char), font='courier 45', fg='gray')
-humid_title_label.grid(row=3, column=0, sticky='W')
+humid_title_label = tk.Label(my_window, text='Humidity'.ljust(23,padding_char), font='courier 25', fg='gray')
+humid_title_label.grid(row=5, column=0, sticky='W')
 update_humid_title_label()
 
 
 # Create the humid_data_label widget
-humid_data_label = tk.Label(my_window, font='courier 45 bold', fg='gray')
-humid_data_label.grid(row=3, column=1)
+humid_data_label = tk.Label(my_window, font='courier 25 bold', fg='gray')
+humid_data_label.grid(row=5, column=1)
 update_humid_data_label()
 
 
 # Create the humid_unit_label widget
-humid_unit_label = tk.Label(my_window, text='%', font='courier 45', fg='gray')
-humid_unit_label.grid(row=3, column=2, sticky='W')
+humid_unit_label = tk.Label(my_window, text='%', font='courier 25', fg='gray')
+humid_unit_label.grid(row=5, column=2, sticky='W')
 update_humid_unit_label()
 
 
 # Create the aqi_2_5_title_label widget
 aqi_2_5_title_label = tk.Label(my_window, text='AQI Index(2.5μm)'.ljust(23,padding_char), font='courier 45', fg='gray')
-aqi_2_5_title_label.grid(row=4, column=0, sticky='W')
+aqi_2_5_title_label.grid(row=1, column=0, sticky='W')
 update_aqi_2_5_title_label()
 
 # Create the aqi_2_5_data_label widget
 aqi_2_5_data_label = tk.Label(my_window, font='courier 45 bold', fg='gray')
-aqi_2_5_data_label.grid(row=4, column=1)
+aqi_2_5_data_label.grid(row=1, column=1)
 update_aqi_2_5_data_label()
 
 
 # Create the aqi_10_label widget
 aqi_10_title_label = tk.Label(my_window, text='AQI Index(10μm)'.ljust(23,padding_char), font='courier 45', fg='gray')
-aqi_10_title_label.grid(row=5, column=0, sticky='W')
+aqi_10_title_label.grid(row=2, column=0, sticky='W')
 update_aqi_10_title_label()
 
 # Create the aqi_10_data_label widget
 aqi_10_data_label = tk.Label(my_window, font='courier 45 bold', fg='gray')
-aqi_10_data_label.grid(row=5, column=1)
+aqi_10_data_label.grid(row=2, column=1)
 update_aqi_10_data_label()
 
 # Create time_last_measurement_label widget
 time_last_measurement_label = tk.Label(my_window, text = 'last update:', font = 'courier 25', fg='gray')
-time_last_measurement_label.grid(row=101, column=1)
+time_last_measurement_label.grid(row=100, column=1)
 update_time_last_measurement_label()
 
 # Create time_last_measurement_data_label widget
 time_last_measurement_data_label = tk.Label(my_window, font = 'courier 25 bold', fg ='gray')
-time_last_measurement_data_label.grid(row=101, column=2, columnspan=2)
+time_last_measurement_data_label.grid(row=100, column=2, columnspan=2)
 update_time_last_measurement_data_label()
 
 
