@@ -1,7 +1,21 @@
-import os
-import glob
+##### LIBRARIES #####
 import time
- 
+from datetime import datetime
+import os
+import os.path
+import glob
+import inspect 
+
+### SETTINGS ###
+
+SLEEP_DURATION = 5 #seconds
+log_name_prefix = "bucha_log"
+module_path = inspect.getfile(inspect.currentframe())
+module_dir = os.path.realpath(os.path.dirname(module_path))
+data_log_dir = module_dir + "/bucha_logs"
+
+
+
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
  
@@ -26,8 +40,33 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c, temp_f
-	
+
+def create_header(fn):
+    if os.path.exists(fn):
+        header = ""
+    else:
+        header = "date & time, temperature\n"
+  
+    return header 
+
+def log_buch_temp():     
+    now = datetime.now()
+    date_stamp = now.strftime("%Y%m%d")
+    
+    log_filename = log_name_prefix + "_" + date_stamp + ".csv"
+    log_file = data_log_dir + "/" + log_filename
+    
+    log_header = create_header(log_file)
+    
+    with open(log_file, "a") as log:
+        log.write(log_header)
+        dt = datetime.now()
+        log.write("{},{}\n".format(dt, bucha_temp))
+    log.close()
+    
+##### MAIN PROGRAM #####
 while True:
-	print(read_temp())	
-	time.sleep(1)
-	
+    bucha_temp = read_temp()
+    log_buch_temp()  
+    time.sleep(SLEEP_DURATION)
+
